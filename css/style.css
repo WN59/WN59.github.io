@@ -27,6 +27,7 @@
  }
    .parallax-container .section {
      width: 100%;
+     line-height: 100px;
    }
  
  @media only screen and (max-width : 992px) {
@@ -54,4 +55,13 @@
  
  footer.page-footer {
    margin: 0;
+ }
+
+
+ #index-banner{
+  height: 700px;
+ }
+
+ #other-banner {
+   height:500px;
  }
