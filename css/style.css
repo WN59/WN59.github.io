@@ -65,3 +65,18 @@
  #other-banner {
    height:500px;
  }
+
+ #txt1{
+  font-size:14px;
+  line-height:12px;
+ }
+
+ .material-icons{
+  display: inline-flex;
+  vertical-align: top;
+}
+
+.dropdown-content{
+  width: max-content !important;
+  height:auto !important;
+}
