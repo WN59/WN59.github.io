@@ -1,267 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Waldy Nowak - PortFolio</title>
-</head>
-
-<body>
-
-    <!-- Header et barre de navigation -->
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio professionnel de Waldy Nowak, développeur Full Stack Junior, mettant en valeur mes compétences et mes projets."
+    />
+    <title>Waldy Nowak - Portfolio</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/main.js" defer></script>
+    <script src="js/carousel.js" defer></script>
+  </head>
+  <body>
     <header>
-
-        <!-- Dropdown Structure -->
-
-          <ul id="dropdown1" class="dropdown-content">
-              <li><a href="https://www.marbrerieduhainaut.fr" target="_blank" class="black-text">Marbrerie du Hainaut</a></li>
-              <li class="divider"></li>
-              <li><a href="https://www.captainpronos.com" target="_blank" class="black-text">Captain Pronos</a></li>
-              <li class="divider"></li>
-              <li><a href="https://www.infirmiere-marquis-lens.fr/" target="_blank" class="black-text">Infirmière Marquis</a></li>
-          </ul>
-
-            <ul id="dropdown2" class="dropdown-content">
-                <li><a href="https://www.marbrerieduhainaut.fr" target="_blank" class="black-text">Marbrerie du Hainaut</a></li>
-                <li class="divider"></li>
-                <li><a href="https://www.captainpronos.com" target="_blank" class="black-text">Captain Pronos</a></li>
-                <li class="divider"></li>
-                <li><a href="https://www.infirmiere-marquis-lens.fr/" target="_blank" class="black-text">Infirmière Marquis</a></li>
-            </ul>
-
-            <ul id="dropdown3" class="dropdown-content">
-              <li><a href="https://github.com/WN59" target="_blank" class="black-text">GitHub</a></li>
-              <li class="divider"></li>
-              <li><a href="https://www.linkedin.com/in/waldy-nowak-968344182/" target="_blank" class="black-text">LinkedIn</a></li>
-             
-          </ul>
-
-            <ul id="dropdown4" class="dropdown-content">
-                <li><a href="https://github.com/WN59" target="_blank" class="black-text">GitHub</a></li>
-                <li class="divider"></li>
-                <li><a href="https://www.linkedin.com/in/waldy-nowak-968344182/" target="_blank" class="black-text">LinkedIn</a></li>
-            </ul>
-
-
-
-            <nav class="white" role="navigation">
-                    <div class="nav-wrapper container">
-                      <a id="logo-container" class="brand-logo black-text">Waldy Nowak</a>
-                      <ul class="right hide-on-med-and-down">
-                        <li><a href="https://wn59.github.io/" class="black-text">Ma présentation</a></li>
-                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Mes réalisations<i class="material-icons right">arrow_drop_down</i></a></li>
-                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown3">Mes réseaux<i class="material-icons right">arrow_drop_down</i></a></li>
-                        <li><a class="black-text" href="assets/CV Nowak Waldy.pdf" download>Télécharger mon CV</a></li>
-                      </ul>
-
-                      <ul id="nav-mobile" class="sidenav">
-                        <li><a href="https://wn59.github.io/" class="black-text">Ma présentation</a></li>
-                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Mes réalisations<i class="material-icons right">arrow_drop_down</i></a></li>
-                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown4">Mes réseaux<i class="material-icons right">arrow_drop_down</i></a></li>
-                        <li><a class="black-text" href="assets/CV Nowak Waldy.pdf" download>Télécharger mon CV</a></li>
-                      </ul>
-                      <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text"><i class="material-icons">menu</i></a>
-                    </div>
-            </nav>
-
+      <nav class="navbar" role="navigation">
+        <div class="nav-brand">Waldy Nowak</div>
+        <button class="mobile-menu-btn" aria-label="Activer le menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link active">Accueil</a></li>
+          <li><a href="#about" class="nav-link">À propos</a></li>
+          <li><a href="#skills" class="nav-link">Compétences</a></li>
+          <li><a href="#projects" class="nav-link">Projets</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+          <li>
+            <a
+              href="assets/cv/CV_NOWAK_WALDY.pdf"
+              class="cv-link"
+              title="Télécharger mon CV sous format PDF (123kb)"
+              download
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              CV
+            </a>
+          </li>
+          <li>
+            <button class="theme-toggle" aria-label="Activer le mode sombre">
+              <svg
+                class="moon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                ></path>
+              </svg>
+              <svg
+                class="sun"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </nav>
     </header>
 
-
-    <!-- Première div avec parralax + images + infos -->
-
-    <div id="index-banner" class="parallax-container">
-
-            <div class="section no-pad-bot">
-              <div class="container">
-                <br><br>
-                <h1 class="header center white-text text-lighten-2">Bienvenue sur mon portfolio</h1>
-                <div class="row center">
-                  <h5 class="header col s12 white-text">Waldy Nowak - Développeur Web / Web Mobile junior</h5>
-                </div>
-                <br><br>
-              </div>
-            </div>
-
-            <div class="parallax"><img src="assets/illidan.png" alt="Bannière World Of Warcraft Illidan Hurlorage"></div>
-    </div>
-
-    <!-- Première section contenant des infos -->
-
-    <div class="container">
-            <div class="section">
-        
-              <!--   Icon Section   -->
-        
-              <div class="row">
-                <div class="col s12 m4">
-                  <div class="icon-block">
-                    <h2 class="center black-text"><i class="material-icons">important_devices</i></h2>
-                    <h5 class="center">Développeur Web Junior</h5>
-        
-                    <p class="light center">Passionné par le domaine de l'informatique,
-                       j'ai décidé d'entreprendre une formation dans le développement WEB.
-                       Celle-ci m'ayant énormément plu, je souhaite progresser dans ce domaine et continuer mes études. </p>
-                  </div>
-                </div>
-        
-                <div class="col s12 m4">
-                  <div class="icon-block">
-                    <h2 class="center black-text"><i class="material-icons">settings</i></h2>
-                    <h5 class="center">Compétences en développement</h5>
-        
-                    <p class="light center">Languages : HTML CSS JS PHP SQL <br>
-                       Gestion de contenus : WordPress <br>
-                       Framework : React, CodeIgniter, Laravel <br>
-                       Outils de collaborations : GitHub Desktop, GitKraken, GitLab</p>
-                  </div>
-                </div>
-        
-                <div class="col s12 m4">
-                  <div class="icon-block">
-                    <h2 class="center black-text"><i class="material-icons">group</i></h2>
-                    <h5 class="center">Envie d'apprendre, et à l'écoute.</h5>
-        
-                    <p class="light center">Comme je suis quelqu'un qui ce donne les moyens de reussir, je n'hésite pas à me renseigner sur les technologies (Angular actuellement), à aider les gens et potentiel clients, ainsi que donner mon avis sur les sujets du quotidien. </p>
-                  </div>
-                </div>
-              </div>
-        
+    <main>
+      <section id="hero" class="hero">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>
+              Bonjour, je suis
+              <span class="highlight">Waldy Nowak</span>
+            </h1>
+            <p class="lead">Développeur Full Stack Junior</p>
+            <p class="hero-description">
+              Passionné par les technologies modernes, j'aspire à créer des
+              applications web performantes.<br />
+              Même si je suis encore en apprentissage et que je cherche
+              constamment à m'améliorer, je m'efforce de proposer des solutions
+              alliant design et fonctionnalité.
+            </p>
+            <div class="hero-cta">
+              <a href="#projects" class="btn btn-primary">Voir mes projets</a>
+              <a href="#contact" class="btn btn-secondary">Me contacter</a>
             </div>
           </div>
+          <div class="hero-image">
+            <div class="blob-animation"></div>
+          </div>
+        </div>
+        <div class="scroll-indicator">
+          <div class="mouse"></div>
+          <span>Défiler vers le bas</span>
+        </div>
+      </section>
 
-    <!-- Deuxième div avec parallax + infos +  détails -->
+      <section id="about" class="about">
+        <div class="container">
+          <h2>À propos de moi</h2>
+          <div class="about-content">
+            <div class="about-text">
+              <p>
+                Passionné par le développement web, je m'efforce de concevoir
+                des applications réactives et intuitives, tout en mettant
+                l'accent sur la performance et un design soigné.
+              </p>
+              <p>
+                Mon objectif est de proposer des projets à la fois fonctionnels
+                et agréables à utiliser, en améliorant constamment mes
+                compétences et ma manière de coder.
+              </p>
 
-    <div id="other-banner" class="parallax-container valign-wrapper">
-            <div class="section no-pad-bot">
-              <div class="container">
-                <div class="row center">
-                  <h5 class="header col s12 white-text">Quelqu'un d'avant tout passionné par les univers vidéoludiques, cinématographiques, musicales et sportifs.</h5>
+              <div class="about-stats">
+                <div class="stat-item">
+                  <span class="stat-number">10+</span>
+                  <span class="stat-label">Projets participés</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number">3</span>
+                  <span class="stat-label">Années d'expérience</span>
                 </div>
               </div>
             </div>
-            <div class="parallax"><img src="assets/snake.jpg" alt="Bannière Metal Gear Solid Snake"></div>
           </div>
-        
-          <!-- Deuxième section contenant des infos -->
-       
-    <div class="container">
-        <div class="section">
-    
-          <!--   Icon Section   -->
-    
-          <div class="row">
-            <div class="col s12 m3">
-              <div class="icon-block">
-                <h2 class="center black-text"><i class="material-icons">sports_mma</i></h2>
-                <h5 class="center">Le sport.</h5>
-    
-                <p class="light center">J'aime beaucoup le sport, quand j'étais plus jeune, je faisais de la natation et par la suite, de la musculation.<br>
-               </p>
-              </div>
-            </div>
-    
-            <div class="col s12 m3">
-              <div class="icon-block">
-                <h2 class="center black-text"><i class="material-icons">
-                    sports_esports</i></h2>
-                <h5 class="center">Les jeux vidéos.</h5>
-    
-                <p class="light center">
-                J'ai beaucoup joué sur Playstation 1, à Metal Gear Solid et sur GameBoy et Nintendo DS à Pokemon.<br>
-                Beaucoup de temps passés sur des jeux PC ( Counter Strike et World Of Warcraft )</p>
-              </div>
-            </div>
-    
-            <div class="col s12 m3">
-              <div class="icon-block">
-                <h2 class="center black-text"><i class="material-icons">movie</i></h2>
-                <h5 class="center">Le cinéma.</h5>
-    
-                <p class="light center">Mes films préférés sont issues des années 80-90 (Terminator, Predator, Rocky, BloodSport, Die Hard, Seven)<br>
-                    J'aime aussi les films actuels (Harry potter, Le monde de Narnia, Le Transporteur, Avengers, Batman) </p>
-              </div>
-            </div>
+        </div>
+      </section>
 
-            <div class="col s12 m3">
-                <div class="icon-block">
-                  <h2 class="center black-text"><i class="material-icons">library_music</i></h2>
-                  <h5 class="center">La musique.</h5>
-      
-                  <p class="light center"> J'aime aussi beaucoup la musique, les genres musicaux (Variétés françaises, Classique, Rock, Pop, Metal, Hard Rock, Electro) mais aussi les musiques de films, jeux vidéos ou issue de l'animation japonaise
-                     .</p>
-                </div>
+      <section id="skills" class="skills">
+        <div class="container">
+          <h2>Compétences</h2>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <h3>HTML <span class="skill-percentage">80%</span></h3>
+              <div class="skill-bar" data-level="80">
+                <div class="skill-progress"></div>
               </div>
+              <div class="skill-tags">
+                <span>HTML5</span>
+                <span>SEO</span>
+              </div>
+            </div>
+            <div class="skill-item">
+              <h3>CSS <span class="skill-percentage">65%</span></h3>
+              <div class="skill-bar" data-level="65">
+                <div class="skill-progress"></div>
+              </div>
+              <div class="skill-tags">
+                <span>SASS</span>
+                <span>SCSS</span>
+              </div>
+            </div>
+            <div class="skill-item">
+              <h3>JavaScript <span class="skill-percentage">55%</span></h3>
+              <div class="skill-bar" data-level="80">
+                <div class="skill-progress"></div>
+              </div>
+              <div class="skill-tags">
+                <span>Angular</span>
+                <span>React</span>
+                <span>Node.js</span>
+              </div>
+            </div>
+            <div class="skill-item">
+              <h3>PHP <span class="skill-percentage">50%</span></h3>
+              <div class="skill-bar" data-level="50">
+                <div class="skill-progress"></div>
+              </div>
+              <div class="skill-tags">
+                <span>Native</span>
+                <span>Doctrine ORM</span>
+              </div>
+            </div>
+            <div class="skill-item">
+              <h3>WordPress <span class="skill-percentage">60%</span></h3>
+              <div class="skill-bar" data-level="60">
+                <div class="skill-progress"></div>
+              </div>
+              <div class="skill-tags">
+                <span>Themes</span>
+                <span>Plugins</span>
+              </div>
+            </div>
+            <div class="skill-item">
+              <h3>Base de données <span class="skill-percentage">50%</span></h3>
+              <div class="skill-bar" data-level="50">
+                <div class="skill-progress"></div>
+              </div>
+              <div class="skill-tags">
+                <span>MySQL</span>
+                <span>MongoDB</span>
+              </div>
+            </div>
           </div>
-    
+        </div>
+      </section>
+
+      <section id="projects" class="projects min-h-screen">
+        <div class="container">
+          <h1>Mes projets</h1>
+          <p class="subtitle">
+            Voici différents projets auxquels j'ai pu participer.
+          </p>
+
+          <div class="carousel-container">
+            <div class="project-carousel" id="projectCarousel"></div>
+
+            <button class="nav-button nav-button-left" id="prevButton">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m15 18-6-6 6-6" />
+              </svg>
+            </button>
+
+            <button class="nav-button nav-button-right" id="nextButton">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <div class="container">
+          <h2>Contactez-moi</h2>
+          <div class="contact-content">
+            <div class="contact-info">
+              <h3>Entrons en contact</h3>
+              <p>
+                Je suis toujours ouvert à de nouvelles opportunités et à des
+                projets intéressants. N'hésitez pas à me contacter !
+              </p>
+              <ul class="contact-details">
+                <li>
+                  <span class="contact-icon">📧</span>
+                  <a href="mailto:waldyno97@gmail.com">waldyno97@gmail.com</a>
+                </li>
+                <li>
+                  <span class="contact-icon">📍</span>
+                  <span>Lille, France</span>
+                </li>
+              </ul>
+            </div>
+            <form
+              id="contact-form"
+              class="contact-form"
+              action="https://formspree.io/f/mnnneblg"
+              method="POST"
+            >
+              <div class="form-group">
+                <label for="name">Nom</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  aria-required="true"
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  aria-required="true"
+                />
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  aria-required="true"
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Envoyer le message
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <h3>Waldy Nowak</h3>
+            <p>Développeur Full Stack Junior</p>
+          </div>
+          <div class="footer-links">
+            <a href="#hero">Accueil</a>
+            <a href="#about">À propos</a>
+            <a href="#skills">Compétences</a>
+            <a href="#projects">Projets</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Waldy Nowak. Tous droits réservés.</p>
         </div>
       </div>
+    </footer>
 
-          <!-- Troisième div avec  parallax + infos + details -->
-
-
-          <div id="other-banner" class="parallax-container valign-wrapper">
-                <div class="section no-pad-bot">
-                  <div class="container">
-                    <div class="row center">
-                      <h5 class="header col s12 white-text">Libre à vous de consulter mes réalisations et me contacter.</h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="parallax"><img src="assets/predator.jpg" alt="Bannière Predator"></div>
-              </div>
-
-        <!-- Footer du portfolio -->
-            
-              <footer class="page-footer white">
-                <div class="container">
-                  <div class="row">
-                    <div class="col l6 s12">
-                      <h5 class="black-text">Me contacter</h5>
-                      <ul>
-                     <li> <i class="material-icons black-text">email</i><span id="txt1" class="black-text"> Email : waldyno97@gmail.com </span><br> </li>
-                     <li> <i class="material-icons black-text">contact_phone</i><span id="txt1" class="black-text"> Discord : Derjik#0896 </span> </li>
-                    </ul>
-            
-            
-                    </div>
-                    <div class="col l3 s12">
-                      <h5 class="black-text">Mes réalisations</h5>
-                      <ul>
-                        <li><a class="black-text" href="https://www.marbrerieduhainaut.fr/" target="_blank">Marbrerie du Hainaut</a></li>
-                        <li><a class="black-text" href="https://www.infirmiere-marquis-lens.fr/" target="_blank">Infirmière Marquis</a></li>
-                        <li><a class="black-text" href="https://www.captainpronos.com/" target="_blank">Captain Pronos</a></li>
-                      </ul>
-                    </div>
-                    <div class="col l3 s12">
-                      <h5 class="black-text">Mes réseaux </h5>
-                      <ul>
-                        <li><a class="black-text" href="https://www.linkedin.com/in/waldy-nowak-968344182/" target="_blank">LinkedIn</a></li>
-                        <li><a class="black-text" href="https://github.com/WN59" target="_blank">GitHub</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="footer-copyright black center">
-                  <div class="container black ">
-                  Made by <a class="white-text text-lighten-3" href="">Waldy Nowak </a> &copy; 2019
-                  </div>
-                </div>
-              </footer>
-
-
-
-
-
-
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="js/init.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>   
-</body>
-
+    <button class="scroll-to-top" aria-label="Retour en haut">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="12" y1="19" x2="12" y2="5" />
+        <polyline points="5 12 12 5 19 12" />
+      </svg>
+    </button>
+  </body>
 </html>
