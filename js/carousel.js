@@ -19,7 +19,7 @@ const projects = [
     title: "La Fondation du Nord",
     description: "Le site web de la Fondation du Nord",
     image:
-      "https://fdn.urbiloglabs.fr/wp-content/uploads/2021/10/AUTONOMIE-1-scaled-e1635341850133.jpg",
+      "https://lafondationdunord.org/wp-content/uploads/2021/10/AUTONOMIE-1-scaled-e1635341850133.jpg",
     technologies: ["Wordpress", "PHP", "CSS", "JavaScript"],
     liveUrl: "https://lafondationdunord.org/",
   },
