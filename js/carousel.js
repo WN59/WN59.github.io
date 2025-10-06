@@ -99,92 +99,184 @@ function initCarousel() {
   const carousel = document.getElementById("projectCarousel");
   const prevButton = document.getElementById("prevButton");
   const nextButton = document.getElementById("nextButton");
+  const indicatorsContainer = document.getElementById("carouselIndicators");
 
   // Render projects
   carousel.innerHTML = projects
     .map((project) => createProjectCard(project))
     .join("");
 
-  let isScrolling = false;
+  let currentIndex = 0;
+  let isAnimating = false;
 
-  // Navigation simple
-  function scroll(direction) {
-    if (isScrolling) return;
+  // Fonction pour obtenir le nombre de cartes par page
+  function getCardsPerPage() {
+    const width = window.innerWidth;
+    if (width >= 1024) return 3; // Desktop: 3 cartes par page
+    if (width >= 768) return 2;  // Tablette: 2 cartes par page
+    return 1; // Mobile: 1 carte par page
+  }
 
-    const cards = Array.from(carousel.querySelectorAll(".project-card"));
-    const cardWidth = cards[0].offsetWidth;
-    const gap = 24;
+  // Calculer le nombre total de pages
+  function getTotalPages() {
+    const cardsPerPage = getCardsPerPage();
+    return Math.ceil(projects.length / cardsPerPage);
+  }
+  
+  // Calculer le nombre de cartes à afficher pour une page donnée
+  function getCardsToShowForPage(pageIndex) {
+    const cardsPerPage = getCardsPerPage();
+    const startIndex = pageIndex * cardsPerPage;
+    const remainingCards = projects.length - startIndex;
+    return Math.min(cardsPerPage, remainingCards);
+  }
 
-    const currentScroll = carousel.scrollLeft;
-    const scrollAmount =
-      direction === "left" ? -(cardWidth + gap) : cardWidth + gap;
+  // Créer les indicateurs
+  function createIndicators() {
+    const totalPages = getTotalPages();
+    indicatorsContainer.innerHTML = Array.from({ length: totalPages }, (_, index) => 
+      `<div class="carousel-indicator" data-index="${index}"></div>`
+    ).join("");
+  }
 
-    carousel.scrollBy({
-      left: scrollAmount,
-      behavior: "smooth",
+  // Mettre à jour l'affichage
+  function updateCarousel() {
+    const cards = carousel.querySelectorAll(".project-card");
+    const cardsPerPage = getCardsPerPage();
+    
+    // Calculer la largeur d'une carte avec sa marge
+    let cardWidth = 0;
+    if (cards.length > 0) {
+      const card = cards[0];
+      const marginRight = parseFloat(getComputedStyle(card).marginRight) || 0;
+      cardWidth = card.offsetWidth + marginRight;
+    }
+    
+    // Calculer le décalage basé sur le nombre de cartes par page
+    const offset = currentIndex * cardsPerPage * cardWidth;
+    
+    carousel.style.transform = `translateX(-${offset}px)`;
+  }
+
+  // Mettre à jour les boutons et indicateurs
+  function updateControls() {
+    const totalPages = getTotalPages();
+    
+    // Boutons
+    prevButton.style.opacity = currentIndex === 0 ? "0.5" : "1";
+    prevButton.style.pointerEvents = currentIndex === 0 ? "none" : "auto";
+    
+    nextButton.style.opacity = currentIndex >= totalPages - 1 ? "0.5" : "1";
+    nextButton.style.pointerEvents = currentIndex >= totalPages - 1 ? "none" : "auto";
+    
+    // Indicateurs
+    const indicators = indicatorsContainer.querySelectorAll(".carousel-indicator");
+    indicators.forEach((indicator, index) => {
+      indicator.classList.toggle("active", index === currentIndex);
     });
+  }
 
-    isScrolling = true;
+  // Navigation
+  function navigate(direction) {
+    if (isAnimating) return;
+    
+    const totalPages = getTotalPages();
+    
+    if (direction === "prev" && currentIndex > 0) {
+      currentIndex--;
+    } else if (direction === "next" && currentIndex < totalPages - 1) {
+      currentIndex++;
+    } else {
+      return;
+    }
+    
+    isAnimating = true;
+    updateCarousel();
+    updateControls();
+    
     setTimeout(() => {
-      isScrolling = false;
-      updateButtonsVisibility();
-    }, 500);
+      isAnimating = false;
+    }, 400);
   }
 
-  // Mise à jour des boutons
-  function updateButtonsVisibility() {
-    const margin = 5;
-    const isAtStart = carousel.scrollLeft <= margin;
-    const isAtEnd =
-      carousel.scrollLeft + carousel.offsetWidth >=
-      carousel.scrollWidth - margin;
-
-    prevButton.style.opacity = isAtStart ? "0.5" : "1";
-    prevButton.style.cursor = isAtStart ? "default" : "pointer";
-    prevButton.style.pointerEvents = isAtStart ? "none" : "auto";
-
-    nextButton.style.opacity = isAtEnd ? "0.5" : "1";
-    nextButton.style.cursor = isAtEnd ? "default" : "pointer";
-    nextButton.style.pointerEvents = isAtEnd ? "none" : "auto";
+  // Aller à une page spécifique
+  function goToPage(index) {
+    if (isAnimating || index === currentIndex) return;
+    
+    const totalPages = getTotalPages();
+    if (index < 0 || index >= totalPages) return;
+    
+    currentIndex = index;
+    isAnimating = true;
+    updateCarousel();
+    updateControls();
+    
+    setTimeout(() => {
+      isAnimating = false;
+    }, 400);
   }
 
-  // Touch events basiques
+  // Gestion du swipe tactile
   let touchStartX = 0;
-  let touchEndX = 0;
+  let touchStartY = 0;
 
-  carousel.addEventListener(
-    "touchstart",
-    (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    },
-    { passive: true }
-  );
+  carousel.addEventListener("touchstart", (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
 
-  carousel.addEventListener(
-    "touchend",
-    (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      const diffX = touchStartX - touchEndX;
-
-      if (Math.abs(diffX) > 50) {
-        if (diffX > 0) {
-          scroll("right");
-        } else {
-          scroll("left");
-        }
+  carousel.addEventListener("touchend", (e) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+    
+    const diffX = touchStartX - touchEndX;
+    const diffY = touchStartY - touchEndY;
+    
+    // Vérifier que c'est un swipe horizontal
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+      if (diffX > 0) {
+        navigate("next");
+      } else {
+        navigate("prev");
       }
-    },
-    { passive: true }
-  );
+    }
+  }, { passive: true });
 
   // Event listeners
-  carousel.addEventListener("scroll", updateButtonsVisibility);
-  window.addEventListener("resize", updateButtonsVisibility);
-  prevButton.addEventListener("click", () => scroll("left"));
-  nextButton.addEventListener("click", () => scroll("right"));
+  prevButton.addEventListener("click", () => navigate("prev"));
+  nextButton.addEventListener("click", () => navigate("next"));
 
-  // Init
-  updateButtonsVisibility();
+  // Redimensionnement
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const totalPages = getTotalPages();
+      if (currentIndex >= totalPages) {
+        currentIndex = totalPages - 1;
+      }
+      createIndicators();
+      updateCarousel();
+      updateControls();
+      
+      // Réattacher les event listeners aux indicateurs
+      const indicators = indicatorsContainer.querySelectorAll(".carousel-indicator");
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener("click", () => goToPage(index));
+      });
+    }, 250);
+  });
+
+  // Initialisation
+  createIndicators();
+  updateCarousel();
+  updateControls();
+  
+  // Attacher les event listeners aux indicateurs
+  const indicators = indicatorsContainer.querySelectorAll(".carousel-indicator");
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener("click", () => goToPage(index));
+  });
 }
 
 // Initialize when DOM is loaded
