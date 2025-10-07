@@ -39,6 +39,13 @@ const projects = [
     technologies: ["Angular", "PHP Doctrine ORM", "CSS", "JavaScript"],
     liveUrl: "https://passeportsecurite.snbpe.org/toupie/",
   },
+  {
+    title:"PRITH Hauts de France",
+    description: "Le site web du PRITH Hauts de France, avec système de connexion.",
+    image: "images/prith.png",
+    technologies: ["Wordpress", "PHP", "CSS", "JavaScript"],
+    liveUrl: "https://prith-hauts-de-france.org/",
+  }
 ];
 
 function createProjectCard(project) {
