@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,15 +13,16 @@
     <script src="js/carousel.js" defer></script>
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
     <header>
-      <nav class="navbar" role="navigation">
+      <nav class="navbar">
         <div class="nav-brand">Waldy Nowak</div>
-        <button class="mobile-menu-btn" aria-label="Activer le menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <ul class="nav-links">
+            <button class="mobile-menu-btn" aria-label="Activer le menu" aria-expanded="false" aria-controls="nav-links">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </button>
+        <ul class="nav-links" id="nav-links">
           <li><a href="#hero" class="nav-link active">Accueil</a></li>
           <li><a href="#about" class="nav-link">À propos</a></li>
           <li><a href="#skills" class="nav-link">Compétences</a></li>
@@ -33,6 +34,7 @@
               class="cv-link"
               title="Télécharger mon CV sous format PDF (123kb)"
               download
+              aria-label="Télécharger mon CV au format PDF"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -44,16 +46,17 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                aria-hidden="true"
               >
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              CV
+              <span>CV</span>
             </a>
           </li>
           <li>
-            <button class="theme-toggle" aria-label="Activer le mode sombre">
+            <button class="theme-toggle" aria-label="Activer le mode sombre" aria-pressed="false" type="button">
               <svg
                 class="moon"
                 xmlns="http://www.w3.org/2000/svg"
@@ -65,6 +68,7 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                aria-hidden="true"
               >
                 <path
                   d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
@@ -81,6 +85,7 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                aria-hidden="true"
               >
                 <circle cx="12" cy="12" r="5"></circle>
                 <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -98,7 +103,7 @@
       </nav>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <section id="hero" class="hero">
         <div class="hero-content">
           <div class="hero-text">
@@ -123,7 +128,7 @@
             <div class="blob-animation"></div>
           </div>
         </div>
-        <div class="scroll-indicator">
+        <div class="scroll-indicator" aria-hidden="true">
           <div class="mouse"></div>
           <span>Défiler vers le bas</span>
         </div>
@@ -166,7 +171,7 @@
           <div class="skills-grid">
             <div class="skill-item">
               <h3>HTML <span class="skill-percentage">80%</span></h3>
-              <div class="skill-bar" data-level="80">
+              <div class="skill-bar" data-level="80" aria-hidden="true">
                 <div class="skill-progress"></div>
               </div>
               <div class="skill-tags">
@@ -176,7 +181,7 @@
             </div>
             <div class="skill-item">
               <h3>CSS <span class="skill-percentage">65%</span></h3>
-              <div class="skill-bar" data-level="65">
+              <div class="skill-bar" data-level="65" aria-hidden="true">
                 <div class="skill-progress"></div>
               </div>
               <div class="skill-tags">
@@ -186,7 +191,7 @@
             </div>
             <div class="skill-item">
               <h3>JavaScript <span class="skill-percentage">55%</span></h3>
-              <div class="skill-bar" data-level="55">
+              <div class="skill-bar" data-level="55" aria-hidden="true">
                 <div class="skill-progress"></div>
               </div>
               <div class="skill-tags">
@@ -197,7 +202,7 @@
             </div>
             <div class="skill-item">
               <h3>PHP <span class="skill-percentage">50%</span></h3>
-              <div class="skill-bar" data-level="50">
+              <div class="skill-bar" data-level="50" aria-hidden="true">
                 <div class="skill-progress"></div>
               </div>
               <div class="skill-tags">
@@ -207,7 +212,7 @@
             </div>
             <div class="skill-item">
               <h3>WordPress <span class="skill-percentage">60%</span></h3>
-              <div class="skill-bar" data-level="60">
+              <div class="skill-bar" data-level="60" aria-hidden="true">
                 <div class="skill-progress"></div>
               </div>
               <div class="skill-tags">
@@ -217,7 +222,7 @@
             </div>
             <div class="skill-item">
               <h3>Base de données <span class="skill-percentage">50%</span></h3>
-              <div class="skill-bar" data-level="50">
+              <div class="skill-bar" data-level="50" aria-hidden="true">
                 <div class="skill-progress"></div>
               </div>
               <div class="skill-tags">
@@ -236,10 +241,10 @@
             Voici différents projets auxquels j'ai pu participer.
           </p>
 
-          <div class="carousel-container">
+          <div class="carousel-container" role="region" aria-label="Carrousel de projets">
             <div class="project-carousel" id="projectCarousel"></div>
 
-            <button class="nav-button nav-button-left" id="prevButton">
+            <button class="nav-button nav-button-left" id="prevButton" aria-label="Projets précédents">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -250,12 +255,13 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                aria-hidden="true"
               >
                 <path d="m15 18-6-6 6-6" />
               </svg>
             </button>
 
-            <button class="nav-button nav-button-right" id="nextButton">
+            <button class="nav-button nav-button-right" id="nextButton" aria-label="Projets suivants">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -266,6 +272,7 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                aria-hidden="true"
               >
                 <path d="m9 18 6-6-6-6" />
               </svg>
@@ -288,11 +295,11 @@
               </p>
               <ul class="contact-details">
                 <li>
-                  <span class="contact-icon">📧</span>
-                  <a href="mailto:waldyno97@gmail.com">waldyno97@gmail.com</a>
+                  <span class="contact-icon" aria-hidden="true">📧</span>
+                  <a href="mailto:waldyno97@gmail.com" aria-label="Envoyer un email à waldyno97@gmail.com">waldyno97@gmail.com</a>
                 </li>
                 <li>
-                  <span class="contact-icon">📍</span>
+                  <span class="contact-icon" aria-hidden="true">📍</span>
                   <span>Lille, France</span>
                 </li>
               </ul>
@@ -302,36 +309,47 @@
               class="contact-form"
               action="https://formspree.io/f/mnnneblg"
               method="POST"
+              novalidate
             >
               <div class="form-group">
-                <label for="name">Nom</label>
+                <label for="name">Nom <span class="required-indicator" aria-label="champ obligatoire">*</span></label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   required
                   aria-required="true"
+                  aria-invalid="false"
+                  aria-describedby="name-error"
                 />
+                <span id="name-error" class="error-message" role="alert" aria-live="polite"></span>
               </div>
               <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">Email <span class="required-indicator" aria-label="champ obligatoire">*</span></label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   required
                   aria-required="true"
+                  aria-invalid="false"
+                  aria-describedby="email-error"
                 />
+                <span id="email-error" class="error-message" role="alert" aria-live="polite"></span>
               </div>
               <div class="form-group">
-                <label for="message">Message</label>
+                <label for="message">Message <span class="required-indicator" aria-label="champ obligatoire">*</span></label>
                 <textarea
                   id="message"
                   name="message"
                   required
                   aria-required="true"
+                  aria-invalid="false"
+                  aria-describedby="message-error"
                 ></textarea>
+                <span id="message-error" class="error-message" role="alert" aria-live="polite"></span>
               </div>
+              <div id="form-success" class="success-message" role="alert" aria-live="polite"></div>
               <button type="submit" class="btn btn-primary">
                 Envoyer le message
               </button>
@@ -341,7 +359,7 @@
       </section>
     </main>
 
-    <footer>
+    <footer role="contentinfo">
       <div class="container">
         <div class="footer-content">
           <div class="footer-brand">
@@ -362,7 +380,7 @@
       </div>
     </footer>
 
-    <button class="scroll-to-top" aria-label="Retour en haut">
+    <button class="scroll-to-top" aria-label="Retour en haut de la page">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -373,6 +391,7 @@
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
+        aria-hidden="true"
       >
         <line x1="12" y1="19" x2="12" y2="5" />
         <polyline points="5 12 12 5 19 12" />

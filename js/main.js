@@ -4,27 +4,34 @@ const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
 // Set initial theme based on system preference
 function setInitialTheme() {
+  if (!themeToggle) return;
+  
   if (prefersDarkScheme.matches) {
     document.documentElement.setAttribute("data-theme", "dark");
     themeToggle.setAttribute("aria-label", "Désactiver le mode sombre");
+    themeToggle.setAttribute("aria-pressed", "true");
   } else {
     document.documentElement.setAttribute("data-theme", "light");
     themeToggle.setAttribute("aria-label", "Activer le mode sombre");
+    themeToggle.setAttribute("aria-pressed", "false");
   }
 }
 
 setInitialTheme();
 
 // Toggle theme
-themeToggle.addEventListener("click", () => {
-  const currentTheme = document.documentElement.getAttribute("data-theme");
-  const newTheme = currentTheme === "dark" ? "light" : "dark";
-  document.documentElement.setAttribute("data-theme", newTheme);
-  themeToggle.setAttribute(
-    "aria-label",
-    newTheme === "dark" ? "Désactiver le mode sombre" : "Activer le mode sombre"
-  );
-});
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    themeToggle.setAttribute(
+      "aria-label",
+      newTheme === "dark" ? "Désactiver le mode sombre" : "Activer le mode sombre"
+    );
+    themeToggle.setAttribute("aria-pressed", newTheme === "dark" ? "true" : "false");
+  });
+}
 
 // Mobile menu functionality
 const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
@@ -71,6 +78,13 @@ function toggleMobileMenu(force = null) {
   // Toggle du menu
   navLinks.classList.toggle("active", newState);
   mobileMenuBtn.classList.toggle("active", newState);
+  
+  // Mettre à jour aria-expanded
+  mobileMenuBtn.setAttribute("aria-expanded", newState ? "true" : "false");
+  mobileMenuBtn.setAttribute(
+    "aria-label",
+    newState ? "Fermer le menu" : "Activer le menu"
+  );
 
   // Animation du bouton hamburger
   const spans = mobileMenuBtn.querySelectorAll("span");
@@ -145,8 +159,10 @@ function setActiveNavLink() {
 
   navItems.forEach((item) => {
     item.classList.remove("active");
+    item.removeAttribute("aria-current");
     if (item.getAttribute("href").slice(1) === current) {
       item.classList.add("active");
+      item.setAttribute("aria-current", "page");
     }
   });
 }
@@ -178,11 +194,118 @@ const observer = new IntersectionObserver(
 
 skillBars.forEach((bar) => observer.observe(bar));
 
-// Form handling
+// Form handling avec validation accessible
 const contactForm = document.getElementById("contact-form");
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const messageInput = document.getElementById("message");
+const nameError = document.getElementById("name-error");
+const emailError = document.getElementById("email-error");
+const messageError = document.getElementById("message-error");
+const formSuccess = document.getElementById("form-success");
+
+// Fonction pour effacer les erreurs
+function clearErrors() {
+  nameError.textContent = "";
+  emailError.textContent = "";
+  messageError.textContent = "";
+  formSuccess.textContent = "";
+  nameInput.setAttribute("aria-invalid", "false");
+  emailInput.setAttribute("aria-invalid", "false");
+  messageInput.setAttribute("aria-invalid", "false");
+}
+
+// Fonction de validation
+function validateForm() {
+  let isValid = true;
+  clearErrors();
+
+  // Validation du nom
+  if (!nameInput.value.trim()) {
+    nameError.textContent = "Le nom est obligatoire";
+    nameInput.setAttribute("aria-invalid", "true");
+    nameInput.focus();
+    isValid = false;
+  }
+
+  // Validation de l'email
+  if (!emailInput.value.trim()) {
+    emailError.textContent = "L'email est obligatoire";
+    emailInput.setAttribute("aria-invalid", "true");
+    if (isValid) {
+      emailInput.focus();
+      isValid = false;
+    }
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+    emailError.textContent = "Veuillez entrer une adresse email valide";
+    emailInput.setAttribute("aria-invalid", "true");
+    if (isValid) {
+      emailInput.focus();
+      isValid = false;
+    }
+  }
+
+  // Validation du message
+  if (!messageInput.value.trim()) {
+    messageError.textContent = "Le message est obligatoire";
+    messageInput.setAttribute("aria-invalid", "true");
+    if (isValid) {
+      messageInput.focus();
+      isValid = false;
+    }
+  }
+
+  return isValid;
+}
+
+// Validation en temps réel
+nameInput.addEventListener("blur", () => {
+  if (!nameInput.value.trim()) {
+    nameError.textContent = "Le nom est obligatoire";
+    nameInput.setAttribute("aria-invalid", "true");
+  } else {
+    nameError.textContent = "";
+    nameInput.setAttribute("aria-invalid", "false");
+  }
+});
+
+emailInput.addEventListener("blur", () => {
+  if (!emailInput.value.trim()) {
+    emailError.textContent = "L'email est obligatoire";
+    emailInput.setAttribute("aria-invalid", "true");
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+    emailError.textContent = "Veuillez entrer une adresse email valide";
+    emailInput.setAttribute("aria-invalid", "true");
+  } else {
+    emailError.textContent = "";
+    emailInput.setAttribute("aria-invalid", "false");
+  }
+});
+
+messageInput.addEventListener("blur", () => {
+  if (!messageInput.value.trim()) {
+    messageError.textContent = "Le message est obligatoire";
+    messageInput.setAttribute("aria-invalid", "true");
+  } else {
+    messageError.textContent = "";
+    messageInput.setAttribute("aria-invalid", "false");
+  }
+});
 
 contactForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  
+  // Valider le formulaire
+  if (!validateForm()) {
+    // Annoncer les erreurs aux lecteurs d'écran
+    const firstError = contactForm.querySelector('[aria-invalid="true"]');
+    if (firstError) {
+      firstError.focus();
+      firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    return;
+  }
+
   const submitButton = contactForm.querySelector('button[type="submit"]');
   const originalButtonText = submitButton.textContent;
 
@@ -190,6 +313,10 @@ contactForm.addEventListener("submit", async (e) => {
     // Désactiver le bouton et montrer l'état de chargement
     submitButton.disabled = true;
     submitButton.textContent = "Envoi en cours...";
+    submitButton.setAttribute("aria-busy", "true");
+    
+    // Effacer les messages précédents
+    clearErrors();
 
     // Envoyer le formulaire via Formspree
     const response = await fetch(contactForm.action, {
@@ -202,20 +329,32 @@ contactForm.addEventListener("submit", async (e) => {
 
     if (response.ok) {
       // Succès
-      alert("Merci pour votre message ! Je vous répondrai dès que possible.");
+      formSuccess.textContent = "Merci pour votre message ! Je vous répondrai dès que possible.";
       contactForm.reset();
+      clearErrors();
+      submitButton.focus(); // Retourner le focus au bouton pour annoncer le succès
     } else {
-      // Erreur
-      throw new Error(
-        "Oops! Une erreur s'est produite lors de l'envoi du message."
-      );
+      // Erreur serveur
+      const errorData = await response.json();
+      formSuccess.textContent = "";
+      formSuccess.textContent = errorData.error || "Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer.";
+      formSuccess.style.color = "#e74c3c";
+      formSuccess.style.borderColor = "#e74c3c";
+      formSuccess.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
+      formSuccess.focus();
     }
   } catch (error) {
-    alert(error.message);
+    formSuccess.textContent = "";
+    formSuccess.textContent = "Oops! Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer.";
+    formSuccess.style.color = "#e74c3c";
+    formSuccess.style.borderColor = "#e74c3c";
+    formSuccess.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
+    formSuccess.focus();
   } finally {
     // Réactiver le bouton et restaurer son texte
     submitButton.disabled = false;
     submitButton.textContent = originalButtonText;
+    submitButton.setAttribute("aria-busy", "false");
   }
 });
 
@@ -224,11 +363,23 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
     e.preventDefault();
     const target = document.querySelector(this.getAttribute("href"));
-    if (target) {
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+    if (!target) return;
+
+    const isSkipLink = this.classList.contains("skip-link");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Défilement vers la cible
+    target.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "start",
+    });
+
+    // Si lien d'évitement: déplacer le focus sur le contenu principal
+    if (isSkipLink) {
+      // S'assurer que la cible est focalisable puis focus
+      if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+      // Petit délai pour laisser le scroll se produire
+      setTimeout(() => target.focus(), prefersReducedMotion ? 0 : 100);
     }
   });
 });
@@ -245,8 +396,10 @@ window.addEventListener("scroll", () => {
 });
 
 scrollToTopButton.addEventListener("click", () => {
+  // Vérifier si l'utilisateur préfère un mouvement réduit
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   window.scrollTo({
     top: 0,
-    behavior: "smooth",
+    behavior: prefersReducedMotion ? "auto" : "smooth",
   });
 });
