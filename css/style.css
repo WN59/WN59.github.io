@@ -262,6 +262,33 @@ section:nth-child(even) {
   display: none;
 }
 
+/* Settings (accessibility) Toggle */
+.settings-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+  padding: var(--spacing-xs);
+}
+
+.settings-toggle svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Visually hidden (screen-reader only) */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 /* Hero Section */
 .hero {
   min-height: 100vh;
@@ -670,6 +697,7 @@ textarea {
   font-weight: 500;
   text-decoration: none;
   transition: var(--transition);
+  font-size: inherit;
 }
 
 .btn-primary {
@@ -769,6 +797,89 @@ a:focus-visible {
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) and (min-width: 769px) {
+  .navbar {
+    padding: var(--spacing-sm) var(--spacing-sm);
+    flex-wrap: wrap;
+    min-height: 60px;
+  }
+
+  .nav-links {
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .nav-brand {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .cv-link {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .hero {
+    padding-top: 70px;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  .hero h1 .highlight {
+    font-size: 3.5rem;
+  }
+
+  .hero-content {
+    gap: var(--spacing-md);
+    padding: 0 var(--spacing-sm);
+  }
+
+  .hero-text {
+    max-width: 550px;
+  }
+
+  .blob-animation {
+    width: 350px;
+    height: 350px;
+  }
+
+  .cv-link {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .cv-link svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .theme-toggle svg,
+  .settings-toggle svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 @media (max-width: 1024px) {
   .container {
     padding: 0 var(--spacing-md);
@@ -1357,6 +1468,224 @@ a:focus-visible {
   .blob-animation {
     width: 250px;
     height: 250px;
+  }
+}
+
+/* Accessibility Modal */
+.a11y-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: grid;
+  place-items: center;
+  z-index: 1100;
+}
+
+.a11y-modal-overlay[hidden] {
+  display: none;
+}
+
+.a11y-modal {
+  width: min(520px, 92vw);
+  max-height: 90vh;
+  overflow: auto;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.a11y-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem 0.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.a11y-modal-header h2 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.a11y-modal-close {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}
+
+.a11y-modal-body {
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.a11y-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 1.5rem;
+}
+
+.a11y-option input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.a11y-option label {
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  flex: 1;
+}
+
+.a11y-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 1rem 1rem 1rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Dyslexic font face (local fonts) */
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("../fonts/opendyslexic-0.91.12/compiled/OpenDyslexic-Regular.woff2") format("woff2"),
+       url("../fonts/opendyslexic-0.91.12/compiled/OpenDyslexic-Regular.woff") format("woff"),
+       url("../fonts/opendyslexic-0.91.12/compiled/OpenDyslexic-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("../fonts/opendyslexic-0.91.12/compiled/OpenDyslexic-Bold.woff2") format("woff2"),
+       url("../fonts/opendyslexic-0.91.12/compiled/OpenDyslexic-Bold.woff") format("woff"),
+       url("../fonts/opendyslexic-0.91.12/compiled/OpenDyslexic-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Apply accessibility modes */
+html.font-dyslexic,
+html.font-dyslexic *,
+html.font-dyslexic body,
+html.font-dyslexic button,
+html.font-dyslexic input,
+html.font-dyslexic textarea,
+html.font-dyslexic select,
+html.font-dyslexic a {
+  font-family: "OpenDyslexic", "Verdana", "Tahoma", "Arial", sans-serif !important;
+}
+
+html.font-large {
+  font-size: 120%;
+}
+
+html.font-large body {
+  font-size: 1em;
+}
+
+html.font-large .btn,
+html.font-large button {
+  font-size: inherit;
+}
+
+/* Adjustments when augmented font is active */
+html.font-large .navbar {
+  padding: var(--spacing-sm) var(--spacing-md);
+  min-height: auto;
+}
+
+html.font-large .nav-links {
+  gap: 0.75rem;
+}
+
+html.font-large .nav-link {
+  padding: 0.5rem 0.75rem;
+  font-size: 1em;
+}
+
+html.font-large .nav-brand {
+  font-size: 1.2em;
+}
+
+html.font-large .cv-link {
+  padding: 0.5rem 0.75rem;
+  font-size: 1em;
+}
+
+html.font-large .cv-link svg {
+  width: 20px;
+  height: 20px;
+}
+
+html.font-large .theme-toggle,
+html.font-large .settings-toggle {
+  padding: 0.5rem;
+}
+
+html.font-large .theme-toggle svg,
+html.font-large .settings-toggle svg {
+  width: 22px;
+  height: 22px;
+}
+
+html.font-large .hero {
+  padding-top: 90px;
+}
+
+html.font-large .hero h1 {
+  margin-top: 0;
+}
+
+html.font-large .hero-content {
+  padding-top: 0;
+}
+
+@media (max-width: 1200px) and (min-width: 769px) {
+  html.font-large .navbar {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  html.font-large .nav-links {
+    gap: 0.5rem;
+  }
+
+  html.font-large .nav-link {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.95em;
+  }
+
+  html.font-large .nav-brand {
+    font-size: 1.1em;
+  }
+
+  html.font-large .hero {
+    padding-top: 85px;
+  }
+}
+
+@media (max-width: 968px) {
+  html.font-large .hero {
+    padding-top: 75px;
+  }
+
+  html.font-large .hero-content {
+    padding-top: 0;
   }
 }
 

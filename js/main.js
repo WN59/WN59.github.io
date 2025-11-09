@@ -403,3 +403,152 @@ scrollToTopButton.addEventListener("click", () => {
     behavior: prefersReducedMotion ? "auto" : "smooth",
   });
 });
+
+// Accessibility settings modal and font preferences
+const settingsToggle = document.querySelector(".settings-toggle");
+const a11yModalOverlay = document.getElementById("a11yModal");
+const a11yCloseButtons = document.querySelectorAll(".a11y-modal-close, .a11y-modal-close-btn");
+const checkboxDyslexic = document.getElementById("toggle-dyslexic");
+const checkboxFontLarge = document.getElementById("toggle-font-large");
+
+let lastFocusedBeforeModal = null;
+
+function applyFontPreferences() {
+  const dyslexicOn = localStorage.getItem("pref-dyslexic") === "true";
+  const largeOn = localStorage.getItem("pref-font-large") === "true";
+
+  document.documentElement.classList.toggle("font-dyslexic", dyslexicOn);
+  document.documentElement.classList.toggle("font-large", largeOn);
+
+  if (checkboxDyslexic) checkboxDyslexic.checked = dyslexicOn;
+  if (checkboxFontLarge) checkboxFontLarge.checked = largeOn;
+}
+
+function getModalFocusable() {
+  if (!a11yModalOverlay || a11yModalOverlay.hasAttribute("hidden")) return [];
+  const modal = a11yModalOverlay.querySelector('.a11y-modal');
+  if (!modal) return [];
+  return Array.from(modal.querySelectorAll(
+    'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  )).filter(el => {
+    const style = window.getComputedStyle(el);
+    return style.display !== 'none' && style.visibility !== 'hidden';
+  });
+}
+
+function openA11yModal() {
+  if (!a11yModalOverlay) return;
+  lastFocusedBeforeModal = document.activeElement;
+  a11yModalOverlay.removeAttribute("hidden");
+  document.body.classList.add("no-scroll");
+  if (settingsToggle) settingsToggle.setAttribute("aria-expanded", "true");
+
+  // Focus le premier élément focusable
+  const focusables = getModalFocusable();
+  if (focusables.length) {
+    focusables[0].focus();
+  }
+}
+
+function closeA11yModal() {
+  if (!a11yModalOverlay) return;
+  a11yModalOverlay.setAttribute("hidden", "true");
+  document.body.classList.remove("no-scroll");
+  if (settingsToggle) {
+    settingsToggle.setAttribute("aria-expanded", "false");
+    if (lastFocusedBeforeModal) {
+      lastFocusedBeforeModal.focus();
+    } else {
+      settingsToggle.focus();
+    }
+  }
+}
+
+// Init preferences on load
+applyFontPreferences();
+
+// Events
+if (settingsToggle) {
+  settingsToggle.addEventListener("click", () => {
+    const isHidden = a11yModalOverlay?.hasAttribute("hidden");
+    if (isHidden) openA11yModal();
+    else closeA11yModal();
+  });
+}
+
+// Close buttons
+a11yCloseButtons.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    closeA11yModal();
+  });
+});
+
+// Click outside to close
+if (a11yModalOverlay) {
+  a11yModalOverlay.addEventListener("click", (e) => {
+    if (e.target === a11yModalOverlay) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeA11yModal();
+    }
+  });
+}
+
+// Key handling: ESC to close and focus trap
+document.addEventListener("keydown", (e) => {
+  if (!a11yModalOverlay || a11yModalOverlay.hasAttribute("hidden")) return;
+
+  if (e.key === "Escape") {
+    e.preventDefault();
+    e.stopPropagation();
+    closeA11yModal();
+    return;
+  }
+
+  if (e.key === "Tab") {
+    const focusables = getModalFocusable();
+    if (!focusables.length) {
+      e.preventDefault();
+      return;
+    }
+
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    const activeElement = document.activeElement;
+
+    if (e.shiftKey) {
+      // Shift + Tab
+      if (activeElement === first || !focusables.includes(activeElement)) {
+        e.preventDefault();
+        e.stopPropagation();
+        last.focus();
+      }
+    } else {
+      // Tab
+      if (activeElement === last || !focusables.includes(activeElement)) {
+        e.preventDefault();
+        e.stopPropagation();
+        first.focus();
+      }
+    }
+  }
+});
+
+// Preference toggles
+if (checkboxDyslexic) {
+  checkboxDyslexic.addEventListener("change", (e) => {
+    const enabled = e.target.checked;
+    localStorage.setItem("pref-dyslexic", enabled ? "true" : "false");
+    document.documentElement.classList.toggle("font-dyslexic", enabled);
+  });
+}
+
+if (checkboxFontLarge) {
+  checkboxFontLarge.addEventListener("change", (e) => {
+    const enabled = e.target.checked;
+    localStorage.setItem("pref-font-large", enabled ? "true" : "false");
+    document.documentElement.classList.toggle("font-large", enabled);
+  });
+}
