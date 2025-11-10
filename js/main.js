@@ -2,19 +2,28 @@
 const themeToggle = document.querySelector(".theme-toggle");
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
-// Set initial theme based on system preference
+// Set initial theme based on localStorage or system preference
 function setInitialTheme() {
   if (!themeToggle) return;
   
-  if (prefersDarkScheme.matches) {
-    document.documentElement.setAttribute("data-theme", "dark");
-    themeToggle.setAttribute("aria-label", "Désactiver le mode sombre");
-    themeToggle.setAttribute("aria-pressed", "true");
+  // Vérifier si un thème est sauvegardé dans localStorage
+  const savedTheme = localStorage.getItem("theme");
+  let theme;
+  
+  if (savedTheme) {
+    // Utiliser le thème sauvegardé
+    theme = savedTheme;
   } else {
-    document.documentElement.setAttribute("data-theme", "light");
-    themeToggle.setAttribute("aria-label", "Activer le mode sombre");
-    themeToggle.setAttribute("aria-pressed", "false");
+    // Sinon, utiliser la préférence système
+    theme = prefersDarkScheme.matches ? "dark" : "light";
   }
+  
+  document.documentElement.setAttribute("data-theme", theme);
+  themeToggle.setAttribute(
+    "aria-label",
+    theme === "dark" ? "Désactiver le mode sombre" : "Activer le mode sombre"
+  );
+  themeToggle.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
 }
 
 setInitialTheme();
@@ -24,6 +33,10 @@ if (themeToggle) {
   themeToggle.addEventListener("click", () => {
     const currentTheme = document.documentElement.getAttribute("data-theme");
     const newTheme = currentTheme === "dark" ? "light" : "dark";
+    
+    // Sauvegarder le thème dans localStorage
+    localStorage.setItem("theme", newTheme);
+    
     document.documentElement.setAttribute("data-theme", newTheme);
     themeToggle.setAttribute(
       "aria-label",
@@ -168,31 +181,6 @@ function setActiveNavLink() {
 }
 
 window.addEventListener("scroll", setActiveNavLink);
-
-// Animate skill bars on scroll
-const skillBars = document.querySelectorAll(".skill-bar");
-
-const animateSkillBars = () => {
-  skillBars.forEach((bar) => {
-    const progress = bar.querySelector(".skill-progress");
-    const level = bar.dataset.level;
-    progress.style.width = `${level}%`;
-  });
-};
-
-// Intersection Observer for skill bars animation
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        animateSkillBars();
-      }
-    });
-  },
-  { threshold: 0.5 }
-);
-
-skillBars.forEach((bar) => observer.observe(bar));
 
 // Form handling avec validation accessible
 const contactForm = document.getElementById("contact-form");

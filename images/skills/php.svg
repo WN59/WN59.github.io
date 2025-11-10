@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="phpTitle">
+  <title id="phpTitle">Logo PHP et Doctrine</title>
+  <defs>
+    <linearGradient id="phpGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7a86b8"/>
+      <stop offset="100%" stop-color="#5560a9"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="url(#phpGradient)"/>
+  <ellipse cx="32" cy="32" rx="26" ry="18" fill="rgba(0, 0, 0, 0.2)"/>
+  <text x="32" y="36" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">PHP</text>
+</svg>
+

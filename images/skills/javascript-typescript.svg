@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="jsTsTitle">
+  <title id="jsTsTitle">Logo JavaScript et TypeScript</title>
+  <defs>
+    <linearGradient id="jsTsGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f7df1e"/>
+      <stop offset="48%" stop-color="#f7df1e"/>
+      <stop offset="52%" stop-color="#3178c6"/>
+      <stop offset="100%" stop-color="#3178c6"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="url(#jsTsGradient)"/>
+  <text x="22" y="37" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#1e1e1e">JS</text>
+  <text x="44" y="37" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff">TS</text>
+</svg>
+

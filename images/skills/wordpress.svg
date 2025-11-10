@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="wordpressTitle">
+  <title id="wordpressTitle">Logo WordPress</title>
+  <defs>
+    <linearGradient id="wordpressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e8bc3"/>
+      <stop offset="100%" stop-color="#115b87"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="url(#wordpressGradient)"/>
+  <circle cx="32" cy="32" r="20" fill="rgba(255, 255, 255, 0.15)"/>
+  <text x="32" y="36" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#ffffff">W</text>
+</svg>
+

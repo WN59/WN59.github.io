@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="agileTitle">
+  <title id="agileTitle">Logo Méthodes Agile et Scrum</title>
+  <defs>
+    <linearGradient id="agileGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f9bde"/>
+      <stop offset="100%" stop-color="#7a48ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="url(#agileGradient)"/>
+  <path d="M18 38c0-8 6.5-14 14-14 5 0 9.3 2.6 12.2 6.6" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M44 22h8v8" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M46 30 40 32" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  <path d="M46 32c0 8-6.5 14-14 14-5 0-9.3-2.6-12.2-6.6" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M20 50h-8v-8" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M18 42 24 40" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+</svg>
+
