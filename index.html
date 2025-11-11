@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/main.js" defer></script>
     <script src="js/carousel.js" defer></script>
+    <script src="js/skills.js" defer></script>
   </head>
   <body>
     <a href="#main-content" class="skip-link">Aller au contenu principal</a>
@@ -191,193 +192,244 @@
           <h2 id="skills-heading">Compétences</h2>
           <p class="skills-intro">
             Une palette de savoir-faire couvrant le front, le back, la qualité web et la gestion de projet.
-          </p>
-          
-          <div class="skills-categories" role="list">
-            <div class="skills-category" role="listitem">
-              <h3 class="category-title">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="16 18 22 12 16 6"></polyline>
-                  <polyline points="8 6 2 12 8 18"></polyline>
-                </svg>
-                Développement Front-End
-              </h3>
-              <div class="skills-grid">
-                <article class="skill-card">
-                  <div class="skill-card-header">
-                    <img src="images/skills/html.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
-                    <h4>HTML</h4>
-                  </div>
-                  <ul class="skill-tags">
-                    <li>HTML5</li>
-                    <li>ARIA Roles</li>
-                    <li>SEO</li>
-                  </ul>
-                </article>
-                <article class="skill-card">
-                  <div class="skill-card-header">
-                    <img src="images/skills/css.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
-                    <h4>CSS &amp; Préprocesseurs</h4>
-                  </div>
-                  <ul class="skill-tags">
-                    <li>CSS</li>
-                    <li>SASS/SCSS</li>
-                    <li>Responsive Design</li>
-                  </ul>
-                </article>
-                <article class="skill-card">
-                  <div class="skill-card-header">
-                    <img src="images/skills/javascript-typescript.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
-                    <h4>JavaScript &amp; TypeScript</h4>
-                  </div>
-                  <ul class="skill-tags">
-                    <li>ES6+</li>
-                    <li>TypeScript</li>
-                  </ul>
-                </article>
-                <article class="skill-card">
-                  <div class="skill-card-header">
-                    <img src="images/skills/angular.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
-                    <h4>Angular</h4>
-                  </div>
-                  <ul class="skill-tags">
-                    <li>RxJS</li>
-                    <li>Formulaires</li>
-                  </ul>
-                </article>
+          </p>    
+          <div class="skills-content">
+            <!-- Onglets de catégories (Pattern Tabs W3C) -->
+            <div class="skills-nav">
+              <div class="skills-category-list" role="tablist" aria-labelledby="skills-heading" aria-describedby="skills-instructions">
+                <div role="presentation">
+                  <button 
+                    class="category-nav-btn active" 
+                    role="tab" 
+                    aria-selected="true" 
+                    aria-controls="panel-frontend" 
+                    id="tab-frontend"
+                    data-category="frontend"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polyline points="16 18 22 12 16 6"></polyline>
+                      <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                    <span>Développement Front-End</span>
+                  </button>
+                </div>
+                <div role="presentation">
+                  <button 
+                    class="category-nav-btn" 
+                    role="tab" 
+                    aria-selected="false" 
+                    aria-controls="panel-backend" 
+                    id="tab-backend"
+                    data-category="backend"
+                    tabindex="-1"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                      <line x1="8" y1="21" x2="16" y2="21"></line>
+                      <line x1="12" y1="17" x2="12" y2="21"></line>
+                    </svg>
+                    <span>Développement Back-End</span>
+                  </button>
+                </div>
+                <div role="presentation">
+                  <button 
+                    class="category-nav-btn" 
+                    role="tab" 
+                    aria-selected="false" 
+                    aria-controls="panel-quality" 
+                    id="tab-quality"
+                    data-category="quality"
+                    tabindex="-1"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    <span>Qualité &amp; Accessibilité</span>
+                  </button>
+                </div>
+                <div role="presentation">
+                  <button 
+                    class="category-nav-btn" 
+                    role="tab" 
+                    aria-selected="false" 
+                    aria-controls="panel-tools" 
+                    id="tab-tools"
+                    data-category="tools"
+                    tabindex="-1"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="3"></circle>
+                      <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l4.2 4.2M23 12h-6m-6 0H5m13.2 5.2l-4.2-4.2m0-6l4.2-4.2"></path>
+                    </svg>
+                    <span>Outils &amp; Méthodes</span>
+                  </button>
+                </div>
               </div>
             </div>
 
-            <div class="skills-category" role="listitem">
-              <h3 class="category-title">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                  <line x1="8" y1="21" x2="16" y2="21"></line>
-                  <line x1="12" y1="17" x2="12" y2="21"></line>
-                </svg>
-                Développement Back-End
-              </h3>
-              <div class="skills-grid">
-                <article class="skill-card">
-                  <div class="skill-card-header">
-                    <img src="images/skills/php.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
-                    <h4>PHP &amp; Doctrine</h4>
-                  </div>
-                  <ul class="skill-tags">
-                    <li>PHP</li>
-                    <li>Doctrine ORM</li>
-                    <li>MVC</li>
-                  </ul>
-                </article>
-                <article class="skill-card">
-                  <div class="skill-card-header">
-                    <img src="images/skills/nodejs.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
-                    <h4>Node.js</h4>
-                  </div>
-                  <ul class="skill-tags">
-                    <li>Express</li>
-                    <li>NPM</li>
-                    <li>APIs REST</li>
-                  </ul>
-                </article>
-                <article class="skill-card">
-                  <div class="skill-card-header">
-                    <img src="images/skills/wordpress.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
-                    <h4>WordPress</h4>
-                  </div>
-                  <ul class="skill-tags">
-                    <li>Thèmes</li>
-                    <li>Plugins</li>
-                    <li>Advanced Custom Fields</li>
-                  </ul>
-                </article>
-                <article class="skill-card">
-                  <div class="skill-card-header">
-                    <img src="images/skills/database.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
-                    <h4>Bases de données</h4>
-                  </div>
-                  <ul class="skill-tags">
-                    <li>MySQL</li>
-                    <li>PostgreSQL</li>
-                    <li>MongoDB</li>
-                  </ul>
-                </article>
+            <!-- Zone des cartes de compétences -->
+            <div class="skills-panels">
+              <!-- Panel Front-End -->
+              <div class="skills-panel" role="tabpanel" id="panel-frontend" aria-labelledby="tab-frontend" tabindex="0">
+                <div class="skills-grid">
+                  <article class="skill-card">
+                    <div class="skill-card-header">
+                      <img src="images/skills/html.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
+                      <h3>HTML</h3>
+                    </div>
+                    <ul class="skill-tags">
+                      <li>HTML5</li>
+                      <li>ARIA Roles</li>
+                      <li>SEO</li>
+                    </ul>
+                  </article>
+                  <article class="skill-card">
+                    <div class="skill-card-header">
+                      <img src="images/skills/css.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
+                      <h3>CSS &amp; Préprocesseurs</h3>
+                    </div>
+                    <ul class="skill-tags">
+                      <li>CSS</li>
+                      <li>SASS/SCSS</li>
+                      <li>Responsive Design</li>
+                    </ul>
+                  </article>
+                  <article class="skill-card">
+                    <div class="skill-card-header">
+                      <img src="images/skills/javascript-typescript.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
+                      <h3>JavaScript &amp; TypeScript</h3>
+                    </div>
+                    <ul class="skill-tags">
+                      <li>ES6+</li>
+                      <li>TypeScript</li>
+                    </ul>
+                  </article>
+                  <article class="skill-card">
+                    <div class="skill-card-header">
+                      <img src="images/skills/angular.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
+                      <h3>Angular</h3>
+                    </div>
+                    <ul class="skill-tags">
+                      <li>RxJS</li>
+                      <li>Formulaires</li>
+                    </ul>
+                  </article>
+                </div>
               </div>
-            </div>
 
-            <div class="skills-category" role="listitem">
-              <h3 class="category-title">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-                Qualité &amp; Accessibilité
-              </h3>
-              <div class="skills-grid">
-                <article class="skill-card">
-                  <div class="skill-card-header">
-                    <img src="images/skills/opquast.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
-                    <h4>Certification OPQUAST</h4>
-                  </div>
-                  <ul class="skill-tags">
-                    <li>Checklist</li>
-                    <li>Bonnes pratiques</li>
-                    <li>Veille</li>
-                  </ul>
-                </article>
-                <article class="skill-card">
-                  <div class="skill-card-header">
-                    <img src="images/skills/accessibilite.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
-                    <h4>Accessibilité Numérique</h4>
-                  </div>
-                  <ul class="skill-tags">
-                    <li>RGAA</li>
-                    <li>WCAG</li>
-                  </ul>
-                </article>
-                <article class="skill-card">
-                  <div class="skill-card-header">
-                    <img src="images/skills/tests.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
-                    <h4>Tests &amp; Recettes</h4>
-                  </div>
-                  <ul class="skill-tags">
-                    <li>Tests fonctionnels</li>
-                    <li>Recettes utilisateurs</li>
-                  </ul>
-                </article>
+              <!-- Panel Back-End -->
+              <div class="skills-panel" role="tabpanel" id="panel-backend" aria-labelledby="tab-backend" tabindex="0" hidden>
+                <div class="skills-grid">
+                  <article class="skill-card">
+                    <div class="skill-card-header">
+                      <img src="images/skills/php.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
+                      <h3>PHP &amp; Doctrine</h3>
+                    </div>
+                    <ul class="skill-tags">
+                      <li>PHP</li>
+                      <li>Doctrine ORM</li>
+                      <li>MVC</li>
+                    </ul>
+                  </article>
+                  <article class="skill-card">
+                    <div class="skill-card-header">
+                      <img src="images/skills/nodejs.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
+                      <h3>Node.js</h3>
+                    </div>
+                    <ul class="skill-tags">
+                      <li>Express</li>
+                      <li>NPM</li>
+                      <li>APIs REST</li>
+                    </ul>
+                  </article>
+                  <article class="skill-card">
+                    <div class="skill-card-header">
+                      <img src="images/skills/wordpress.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
+                      <h3>WordPress</h3>
+                    </div>
+                    <ul class="skill-tags">
+                      <li>Thèmes</li>
+                      <li>Plugins</li>
+                      <li>ACF Custom Fields</li>
+                    </ul>
+                  </article>
+                  <article class="skill-card">
+                    <div class="skill-card-header">
+                      <img src="images/skills/database.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
+                      <h3>Bases de données</h3>
+                    </div>
+                    <ul class="skill-tags">
+                      <li>MySQL</li>
+                      <li>PostgreSQL</li>
+                      <li>MongoDB</li>
+                    </ul>
+                  </article>
+                </div>
               </div>
-            </div>
 
-            <div class="skills-category" role="listitem">
-              <h3 class="category-title">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <circle cx="12" cy="12" r="3"></circle>
-                  <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l4.2 4.2M23 12h-6m-6 0H5m13.2 5.2l-4.2-4.2m0-6l4.2-4.2"></path>
-                </svg>
-                Outils &amp; Méthodes
-              </h3>
-              <div class="skills-grid">
-                <article class="skill-card">
-                  <div class="skill-card-header">
-                    <img src="images/skills/git.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
-                    <h4>Git</h4>
-                  </div>
-                  <ul class="skill-tags">
-                    <li>GitFlow</li>
-                    <li>Revues de code</li>
-                  </ul>
-                </article>
-                <article class="skill-card">
-                  <div class="skill-card-header">
-                    <img src="images/skills/agile.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
-                    <h4>Méthodes Agile / SCRUM</h4>
-                  </div>
-                  <ul class="skill-tags">
-                    <li>Scrum</li>
-                    <li>Kanban</li>
-                    <li>Rétrospectives</li>
-                  </ul>
-                </article>
+              <!-- Panel Qualité & Accessibilité -->
+              <div class="skills-panel" role="tabpanel" id="panel-quality" aria-labelledby="tab-quality" tabindex="0" hidden>
+                <div class="skills-grid">
+                  <article class="skill-card">
+                    <div class="skill-card-header">
+                      <img src="images/skills/opquast.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
+                      <h3>Certification OPQUAST</h3>
+                    </div>
+                    <ul class="skill-tags">
+                      <li>Checklist</li>
+                      <li>Bonnes pratiques</li>
+                      <li>Veille</li>
+                    </ul>
+                  </article>
+                  <article class="skill-card">
+                    <div class="skill-card-header">
+                      <img src="images/skills/accessibilite.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
+                      <h3>Accessibilité Numérique</h3>
+                    </div>
+                    <ul class="skill-tags">
+                      <li>RGAA</li>
+                      <li>WCAG</li>
+                    </ul>
+                  </article>
+                  <article class="skill-card">
+                    <div class="skill-card-header">
+                      <img src="images/skills/tests.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
+                      <h3>Tests &amp; Recettes</h3>
+                    </div>
+                    <ul class="skill-tags">
+                      <li>Tests fonctionnels</li>
+                      <li>Recettes utilisateurs</li>
+                    </ul>
+                  </article>
+                </div>
+              </div>
+
+              <!-- Panel Outils & Méthodes -->
+              <div class="skills-panel" role="tabpanel" id="panel-tools" aria-labelledby="tab-tools" tabindex="0" hidden>
+                <div class="skills-grid">
+                  <article class="skill-card">
+                    <div class="skill-card-header">
+                      <img src="images/skills/git.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
+                      <h3>Git</h3>
+                    </div>
+                    <ul class="skill-tags">
+                      <li>GitFlow</li>
+                      <li>Revues de code</li>
+                    </ul>
+                  </article>
+                  <article class="skill-card">
+                    <div class="skill-card-header">
+                      <img src="images/skills/agile.svg" alt="" class="skill-logo" loading="lazy" width="48" height="48" />
+                      <h3>Méthodes Agile / SCRUM</h3>
+                    </div>
+                    <ul class="skill-tags">
+                      <li>Scrum</li>
+                      <li>Kanban</li>
+                      <li>Rétrospectives</li>
+                    </ul>
+                  </article>
+                </div>
               </div>
             </div>
           </div>
